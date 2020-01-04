@@ -7,12 +7,11 @@
   -*- extra stuff goes here -*-
 
   <browser:page
-     name="to-do-view"
-     for="Products.CMFCore.interfaces.IFolderish"
+     name="view"
+     for="edi.documentation.content.todo_task.ITodoTask"
      class=".to_do_view.ToDoView"
      template="to-do-view.pt"
      permission="zope2.View"
      />
-
 
 </configure>

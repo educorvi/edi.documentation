@@ -1,3 +1,18 @@
-<div class="days_to_conf">
-    ${view/message}
+<div class="container">
+  <table class="table table-sm">
+  <tbody>
+    <tr tal:condition="context/ansprechpartner">
+      <td><ul><li tal:repeat="partner context/ansprechpartner" tal:content="partner"/></ul></td>
+    </tr>
+    <tr tal:condition="context/externe_url">
+      <td><a target="_blank" tal:attributes="href context/externe_url" tal:content="context/externe_url" /></td>
+    </tr>
+    <tr tal:condition="context/zope_admin">
+      <td tal:content="context/externe_url" /></td>
+    </tr>
+    <tr tal:condition="context/serveradressen">
+      <td><ul><li tal:repeat="adresse context/serveradressen" tal:content="adresse"/></ul></td>
+    </tr>
+  </tbody>
+  </table>
 </div>

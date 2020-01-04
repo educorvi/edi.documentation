@@ -19,9 +19,20 @@ class IDocumentationData(model.Schema):
     """
     """
 
-    project = schema.TextLine(
-        title=_(u'Project'),
-        description=_(u'Give in a project name'),
+    ansprechpartner = schema.List(title="Ansprechpartner im Projekt", 
+        value_type=schema.TextLine(),
+        required=False,
+    )
+
+    externe_url = schema.URI(title="Externe URL für das Projekt",
+        required=False,
+    )
+
+    zope_admin = schema.TextLine(title="Webserver-Admin (z.B: Zope-Admin)",
+        required=False,
+    )
+
+    serveradressen = schema.URI(title="Serveradressen / Shell-Zugriff",
         required=False,
     )
 
