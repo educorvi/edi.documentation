@@ -7,6 +7,16 @@
   -*- extra stuff goes here -*-
 
   <browser:viewlet
+     name="to-do-viewlet"
+     for="plone.app.contenttypes.interfaces.IDocument"
+     manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+     layer="edi.documentation.interfaces.IEdiDocumentationLayer"
+     class=".to_do_viewlet.ToDoViewlet"
+     template="to-do-viewlet.pt"
+     permission="zope2.View"
+     />
+
+  <browser:viewlet
      name="projektdaten-viewlet"
      for="plone.app.contenttypes.interfaces.IDocument"
      manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
