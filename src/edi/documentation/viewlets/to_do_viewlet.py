@@ -5,11 +5,13 @@ from plone.app.layout.viewlets import ViewletBase
 
 class ToDoViewlet(ViewletBase):
 
-    def update(self):
-        self.message = self.get_message()
-
-    def get_message(self):
-        return u'My message'
+    def get_entries(self):
+        todos = self.context.listFolderContents(contentFilter={"portal_type" : "ToDo Task"})
+        todos.sort(key=lambda x: x.datetime, reverse=False)
+        return todos
 
     def render(self):
+        entries = self.context.listFolderContents(contentFilter={"portal_type" : "ToDo Task"})
+        if not entries:
+            return ''
         return super(ToDoViewlet, self).render()

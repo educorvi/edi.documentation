@@ -24,7 +24,7 @@
 
         <h2 tal:condition="context/datetime">Wann</h2>
 
-        <div tal:condition="context/datetime" tal:content="python:context.datetime.strftime('%d.%m.%Y')" />
+        <div tal:condition="context/datetime" tal:content="python:context.datetime.strftime('%d.%m.%Y %H:%M')" />
 
         <h2 tal:condition="context/responsible">Wer</h2>
      
