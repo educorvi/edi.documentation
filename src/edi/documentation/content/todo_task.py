@@ -10,15 +10,15 @@ class ITodoTask(model.Schema):
     """ Marker interface and Dexterity Python Schema for TodoTask
     """
 
-    title = schema.TextLine(title="ToDo (Was?)")
+    title = schema.TextLine(title=u"ToDo (Was?)")
 
-    description = schema.Text(title="Weitere Beschreibung zur ToDo Augabe")
+    description = schema.Text(title=u"Weitere Beschreibung zur ToDo Augabe")
 
-    datetime = schema.Datetime(title="Wann?", required=False)
+    datetime = schema.Datetime(title=u"Wann?", required=False)
 
-    responsible = schema.TextLine(title="Wer?" required = False)
+    responsible = schema.TextLine(title=u"Wer?", required = False)
 
-    excludeFromDisplay = schema.Bool(title="ToDo Aufgabe von den normalen Ordneransichten ausschließen",
+    excludeFromDisplay = schema.Bool(title=u"ToDo Aufgabe von den normalen Ordneransichten ausschließen",
                                      default=True,)
 
 @implementer(ITodoTask)

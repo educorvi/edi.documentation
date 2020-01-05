@@ -9,7 +9,7 @@
   <browser:viewlet
      name="to-do-viewlet"
      for="plone.app.contenttypes.interfaces.IFolder"
-     manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+     manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
      layer="edi.documentation.interfaces.IEdiDocumentationLayer"
      class=".to_do_viewlet.ToDoViewlet"
      template="to-do-viewlet.pt"
@@ -19,7 +19,7 @@
   <browser:viewlet
      name="projektdaten-viewlet"
      for="*"
-     manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+     manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
      layer="edi.documentation.interfaces.IEdiDocumentationLayer"
      class=".projektdaten_viewlet.ProjektdatenViewlet"
      template="projektdaten-viewlet.pt"

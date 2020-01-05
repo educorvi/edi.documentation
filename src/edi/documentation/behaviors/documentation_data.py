@@ -19,20 +19,27 @@ class IDocumentationData(model.Schema):
     """
     """
 
-    ansprechpartner = schema.List(title="Ansprechpartner im Projekt", 
+    model.fieldset(
+        'projectdata',
+        label=_(u"Projektdaten"),
+        fields=['ansprechpartner', 'externe_url', 'zope_admin', 'serveradressen']
+    )
+
+    ansprechpartner = schema.List(title=u"Ansprechpartner im Projekt", 
         value_type=schema.TextLine(),
         required=False,
     )
 
-    externe_url = schema.URI(title="Externe URL für das Projekt",
+    externe_url = schema.URI(title=u"Externe URL für das Projekt",
         required=False,
     )
 
-    zope_admin = schema.TextLine(title="Webserver-Admin (z.B: Zope-Admin)",
+    zope_admin = schema.TextLine(title=u"Webserver-Admin (z.B: Zope-Admin)",
         required=False,
     )
 
-    serveradressen = schema.URI(title="Serveradressen / Shell-Zugriff",
+    serveradressen = schema.List(title=u"Serveradressen / Shell-Zugriff",
+        value_type=schema.TextLine(),
         required=False,
     )
 
@@ -44,11 +51,41 @@ class DocumentationData(object):
         self.context = context
 
     @property
-    def project(self):
-        if hasattr(self.context, 'project'):
-            return self.context.project
+    def ansprechpartner(self):
+        if hasattr(self.context, 'ansprechpartner'):
+            return self.context.ansprechpartner
         return None
 
-    @project.setter
-    def project(self, value):
-        self.context.project = value
+    @ansprechpartner.setter
+    def ansprechpartner(self, value):
+        self.context.ansprechpartner = value
+
+    @property
+    def externe_url(self):
+        if hasattr(self.context, 'externe_url'):
+            return self.context.externe_url
+        return None
+
+    @externe_url.setter
+    def externe_url(self, value):
+        self.context.externe_url = value
+
+    @property
+    def zope_admin(self):
+        if hasattr(self.context, 'zope_admin'):
+            return self.context.zope_admin
+        return None
+
+    @zope_admin.setter
+    def zope_admin(self, value):
+        self.context.zope_admin = value
+
+    @property
+    def serveradressen(self):
+        if hasattr(self.context, 'serveradressen'):
+            return self.context.serveradressen
+        return None
+
+    @serveradressen.setter
+    def serveradressen(self, value):
+        self.context.serveradressen = value
