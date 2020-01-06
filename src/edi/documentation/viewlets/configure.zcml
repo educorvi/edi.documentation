@@ -7,16 +7,6 @@
   -*- extra stuff goes here -*-
 
   <browser:viewlet
-     name="edi-breadcrumbs"
-     for="plone.app.contenttypes.interfaces.IDocument"
-     manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
-     layer="edi.documentation.interfaces.IEdiDocumentationLayer"
-     class=".edi_breadcrumbs.EdiBreadcrumbs"
-     template="edi-breadcrumbs.pt"
-     permission="zope2.View"
-     />
-
-  <browser:viewlet
      name="to-do-viewlet"
      for="plone.app.contenttypes.interfaces.IFolder"
      manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
