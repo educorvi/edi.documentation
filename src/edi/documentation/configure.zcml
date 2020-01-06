@@ -50,5 +50,6 @@
 
     <include package=".behaviors" />
 
+    <adapter factory="edi.documentation.content.todo_task.endIndexer" name="end" />
 
 </configure>
