@@ -28,7 +28,26 @@
 
         <h2 tal:condition="context/responsible">Wer</h2>
      
-        <div tal:condition="context/responsible" tal:content="context/responsible">
+        <div tal:condition="context/responsible" tal:content="context/responsible" />
+
+        <div tal:condition="context/referenz">
+          <h2>Referenz-URL, z.B.: github</h2>
+          <a tal:attributes="href context/referenz" tal:content="context/referenz"/>
+        </div>
+
+        <div tal:condition="view/get_erledigung">
+          <h2>Notizen zur Erledigung der ToDo Aufgabe</h2>
+          <span tal:replace="structure view/get_erledigung"/>
+        </div>
+
+        <div tal:condition="view/get_contents">
+          <h2>Weitere Inhalte zum ToDo</h2>
+          <ul class="list-group">
+            <li tal:repeat="entry view/get_contents" class="list-group-item">
+              <a href="" tal:attributes="href python:entry.getURL()" tal:content="string:${entry/Title} (${entry/portal_type})"/>
+            </li>
+          </ul>
+        </div>
 
         <div tal:replace="structure provider:plone.belowcontentbody" />
 

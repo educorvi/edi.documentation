@@ -3,5 +3,9 @@
     <index name="Responsible" meta_type="FieldIndex">
         <indexed_attr value="responsible"/>
     </index>
+    <index name="Projekt" meta_type="FieldIndex">
+        <indexed_attr value="Projekt"/>
+    </index>
     <column value="responsible"/>
+    <column value="Projekt"/>
 </object>

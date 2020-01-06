@@ -37,3 +37,7 @@ def endIndexer(obj):
     if obj.datetime is None:
         return None
     return DateTime(obj.datetime)
+
+@indexer(ITodoTask)
+def parentTitleIndexer(obj):
+    return obj.aq_parent.title
