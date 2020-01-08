@@ -7,6 +7,14 @@
   -*- extra stuff goes here -*-
 
   <browser:page
+     name="to-do-done"
+     for="Products.CMFCore.interfaces.IFolderish"
+     class=".to_do_done.ToDoDone"
+     template="to-do-done.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
      name="view"
      for="edi.documentation.content.todo_task.ITodoTask"
      class=".to_do_view.ToDoView"
