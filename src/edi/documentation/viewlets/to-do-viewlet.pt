@@ -1,20 +1,28 @@
 <div tal:define="todos view/get_entries" class="container">
   <div class="col-md-1"></div>
   <div class="col-12 col-md-10">
-  <h2>ToDo-Liste</h2>
+  <div class="row">
+    <div class="col-8"><h2>ToDo-Liste</h2></div>
+    <div tal:condition="view/get_dones" class="col-4">
+      <a class="btn btn-success btn-sm" role="button" tal:attributes="href view/done_view">Erledigte ToDos</a>
+    </div>
+    <div tal:condition="not:view/get_dones" class="col-4"></div>
+  </div>
   <table class="table table-striped table-responsive">
   <thead class="thead-dark">
     <tr>
       <th>Was</th>
       <th>Wann</th>
       <th>Wer</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody>
     <tr tal:repeat="todo todos">
-      <td><a tal:attributes="href python:todo.absolute_url()" tal:content="todo/title"/></td>
-      <td><span tal:content="python: todo.datetime.strftime('%d.%m.%Y')" /></td>
+      <td><a tal:attributes="href python:todo.getURL()" tal:content="todo/Title"/></td>
+      <td><span tal:content="python: todo.end.strftime('%d.%m.%Y')" /></td>
       <td><span tal:content="todo/responsible"/></td>
+      <td><span tal:content="todo/review_state"/></td>
     </tr>
   </tbody>
   </table>

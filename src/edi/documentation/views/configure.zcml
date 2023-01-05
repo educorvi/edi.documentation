@@ -7,7 +7,7 @@
   -*- extra stuff goes here -*-
 
   <browser:page
-     name="to-do-done"
+     name="done_view"
      for="Products.CMFCore.interfaces.IFolderish"
      class=".to_do_done.ToDoDone"
      template="to-do-done.pt"

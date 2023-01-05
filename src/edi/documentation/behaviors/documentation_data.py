@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from edi.documentation import _
 from plone import schema
 from plone.autoform.interfaces import IFormFieldProvider
