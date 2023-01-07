@@ -3,9 +3,25 @@ from plone.app.textfield import RichText
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from zope import schema
+from zope.interface import provider
 from zope.interface import implementer
 from DateTime import DateTime
 from plone.indexer import indexer
+from plone import api as ploneapi
+from zope.schema.interfaces import IContextSourceBinder
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+
+@provider(IContextSourceBinder)
+def get_users(context):
+
+    terms = []
+    users = ploneapi.user.get_users()
+    for user in users:
+        userid = user.getId()
+        email = user.getProperty('email')
+        fullname = user.getProperty('fullname')
+        terms.append(SimpleTerm(value=userid, token=email, title=fullname))
+    return SimpleVocabulary(terms)
 
 
 class ITodoTask(model.Schema):
@@ -20,7 +36,7 @@ class ITodoTask(model.Schema):
 
     referenz = schema.URI(title=u"Referenz-URL zu dieser Aufgabe", description=u"z.B: URL auf Github", required=False)
 
-    responsible = schema.TextLine(title=u"Wer?", required = False)
+    responsible = schema.Choice(title=u"Wer?", source = get_users, required = False)
 
     erledigung = RichText(title=u"Dokumentation zur Erledigung der ToDo Aufgabe", required = False)
 

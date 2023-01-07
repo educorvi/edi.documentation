@@ -3,6 +3,10 @@
   <div class="col-12 col-md-10">
   <table class="table table-sm">
   <tbody>
+    <tr>
+      <th>Projektleiter:in/Product Owner</th>
+      <td tal:content="context/product_owner"/>
+    </tr>
     <tr tal:condition="context/ansprechpartner">
       <th>Ansprechpartner</th>
       <td><ul><li tal:repeat="partner context/ansprechpartner" tal:content="partner"/></ul></td>

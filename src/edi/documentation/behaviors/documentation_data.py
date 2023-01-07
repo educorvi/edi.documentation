@@ -21,13 +21,15 @@ class IDocumentationData(model.Schema):
     model.fieldset(
         'projectdata',
         label=_(u"Projektdaten"),
-        fields=['projektleiter', 'ansprechpartner', 'externe_url', 'zope_admin', 'serveradressen', 'invoice_str_hnr', 'invoice_plz', 'invoice_ort']
+        fields=['product_owner', 'pl_on_invoice', 'ansprechpartner', 'externe_url', 'zope_admin', 'serveradressen', 
+                'invoice_str_hnr', 'invoice_plz', 'invoice_ort']
     )
 
-    projektleiter = schema.TextLine(title="Projektleiter:in oder Product-Owner",
+    product_owner = schema.TextLine(title="Projektleiter:in oder Product-Owner",
         required=False,)
 
-    pl_on_invoice = schema.Bool(title="Soll der/die Projektleiter:in oder Product-Owner auf der Rechnung erscheinen?")
+    pl_on_invoice = schema.Bool(title="Soll der/die Projektleiter:in oder Product-Owner auf der Rechnung erscheinen?",
+        required=False)
 
     ansprechpartner = schema.List(title=u"Ansprechpartner im Projekt", 
         value_type=schema.TextLine(),
@@ -65,6 +67,37 @@ class IDocumentationData(model.Schema):
 class DocumentationData(object):
     def __init__(self, context):
         self.context = context
+
+    @property
+    def product_owner(self):
+        if hasattr(self.context, 'product_owner'):
+            return self.context.product_owner
+        return None
+
+    @product_owner.setter
+    def product_owner(self, value):
+        self.context.product_owner = value
+
+    @property
+    def pl_on_invoice(self):
+        if hasattr(self.context, 'pl_on_invoice'):
+            return self.context.pl_on_invoice
+        return None
+
+    @pl_on_invoice.setter
+    def pl_on_invoice(self, value):
+        self.context.pl_on_invoice = value
+
+    @property
+    def ansprechpartner(self):
+        if hasattr(self.context, 'ansprechpartner'):
+            return self.context.ansprechpartner
+        return None
+
+    @ansprechpartner.setter
+    def ansprechpartner(self, value):
+        self.context.ansprechpartner = value
+
 
     @property
     def ansprechpartner(self):
@@ -105,3 +138,34 @@ class DocumentationData(object):
     @serveradressen.setter
     def serveradressen(self, value):
         self.context.serveradressen = value
+
+
+    @property
+    def invoice_str_hnr(self):
+        if hasattr(self.context, 'invoice_str_hnr'):
+            return self.context.invoice_str_hnr
+        return None
+
+    @invoice_str_hnr.setter
+    def invoice_str_hnr(self, value):
+        self.context.invoice_str_hnr = value
+
+    @property
+    def invoice_plz(self):
+        if hasattr(self.context, 'invoice_plz'):
+            return self.context.invoice_plz
+        return None
+
+    @invoice_plz.setter
+    def invoice_plz(self, value):
+        self.context.invoice_plz = value
+
+    @property
+    def invoice_ort(self):
+        if hasattr(self.context, 'invoice_ort'):
+            return self.context.invoice_ort
+        return None
+
+    @invoice_ort.setter
+    def invoice_ort(self, value):
+        self.context.invoice_ort = value
