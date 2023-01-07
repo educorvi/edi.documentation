@@ -21,8 +21,13 @@ class IDocumentationData(model.Schema):
     model.fieldset(
         'projectdata',
         label=_(u"Projektdaten"),
-        fields=['ansprechpartner', 'externe_url', 'zope_admin', 'serveradressen']
+        fields=['projektleiter', 'ansprechpartner', 'externe_url', 'zope_admin', 'serveradressen', 'invoice_str_hnr', 'invoice_plz', 'invoice_ort']
     )
+
+    projektleiter = schema.TextLine(title="Projektleiter:in oder Product-Owner",
+        required=False,)
+
+    pl_on_invoice = schema.Bool(title="Soll der/die Projektleiter:in oder Product-Owner auf der Rechnung erscheinen?")
 
     ansprechpartner = schema.List(title=u"Ansprechpartner im Projekt", 
         value_type=schema.TextLine(),
@@ -39,6 +44,18 @@ class IDocumentationData(model.Schema):
 
     serveradressen = schema.List(title=u"Serveradressen / Shell-Zugriff",
         value_type=schema.TextLine(),
+        required=False,
+    )
+
+    invoice_str_hnr = schema.TextLine(title="Straße und Hausnummer für evtl. abweichende Rechnungsanschrift",
+        required=False,
+    )
+
+    invoice_plz = schema.TextLine(title="Postleitzahl für evtl. abweichende Rechnungsanschrift",
+        required=False,
+    )
+
+    invoice_ort = schema.TextLine(title="Ortsangabe für evtl. abweichende Rechnungsanschrift",
         required=False,
     )
 
