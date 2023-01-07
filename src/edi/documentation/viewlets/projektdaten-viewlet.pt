@@ -14,16 +14,16 @@
     <tr tal:condition="context/zope_admin">
       <th>Webserver-Admin</th>
       <td>
-        <a class="btn btn-primary btn-sm" role="button" data-toggle="collapse" href="#collapseAdmin" 
-          aria-controls="collapseAdmin">anzeigen</a>
+        <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdmin" 
+		aria-expanded="false" aria-controls="collapseAdmin">anzeigen</button>
         <span class="collapse ml-3" id="collapseAdmin"><span tal:content="context/zope_admin" /></span>
       </td>
     </tr>
     <tr tal:condition="context/serveradressen">
       <th>Server-Adressen</th>
       <td>
-        <a class="btn btn-primary btn-sm" role="button" data-toggle="collapse" href="#collapseServer" 
-          aria-controls="collapseServer">anzeigen</a>
+        <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseServer" 
+		aria-expanded="false" aria-controls="collapseServer">anzeigen</button>
         <div class="collapse mt-3" id="collapseServer">
           <ul><li tal:repeat="adresse context/serveradressen" tal:content="adresse"/></ul>
         </div>
@@ -32,6 +32,5 @@
   </tbody>
   </table>
   </div>
-
   <div class="col-md-1"></div>
 </div>
