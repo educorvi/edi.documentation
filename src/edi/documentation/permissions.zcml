@@ -7,6 +7,12 @@
   <!-- -*- extra stuff goes here -*- -->
 
     <permission
+        id="edi.documentation.AddKanbanBoard"
+        title="edi.documentation: Add KanbanBoard"
+    />
+
+
+    <permission
         id="edi.documentation.AddTodoTask"
         title="edi.documentation: Add TodoTask"
     />

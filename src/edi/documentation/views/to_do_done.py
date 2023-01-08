@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from plone import api
 from edi.documentation import _
+from plone import api
 from Products.Five.browser import BrowserView
+
 
 # from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 

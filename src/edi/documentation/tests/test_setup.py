@@ -7,6 +7,7 @@ from plone.app.testing import TEST_USER_ID
 
 import unittest
 
+
 try:
     from Products.CMFPlone.utils import get_installer
 except ImportError:
@@ -33,8 +34,7 @@ class TestSetup(unittest.TestCase):
 
     def test_browserlayer(self):
         """Test that IEdiDocumentationLayer is registered."""
-        from edi.documentation.interfaces import (
-            IEdiDocumentationLayer)
+        from edi.documentation.interfaces import IEdiDocumentationLayer
         from plone.browserlayer import utils
         self.assertIn(
             IEdiDocumentationLayer,
@@ -63,8 +63,7 @@ class TestUninstall(unittest.TestCase):
 
     def test_browserlayer_removed(self):
         """Test that IEdiDocumentationLayer is removed."""
-        from edi.documentation.interfaces import \
-            IEdiDocumentationLayer
+        from edi.documentation.interfaces import IEdiDocumentationLayer
         from plone.browserlayer import utils
         self.assertNotIn(
             IEdiDocumentationLayer,

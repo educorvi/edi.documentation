@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from edi.documentation.content.todo_task import ITodoTask  # NOQA E501
+from edi.documentation.content.kanban_board import IKanbanBoard  # NOQA E501
 from edi.documentation.testing import EDI_DOCUMENTATION_INTEGRATION_TESTING  # noqa
 from plone import api
 from plone.api.exc import InvalidParameterError
@@ -12,7 +12,7 @@ from zope.component import queryUtility
 import unittest
 
 
-class TodoTaskIntegrationTest(unittest.TestCase):
+class KanbanBoardIntegrationTest(unittest.TestCase):
 
     layer = EDI_DOCUMENTATION_INTEGRATION_TESTING
 
@@ -20,65 +20,69 @@ class TodoTaskIntegrationTest(unittest.TestCase):
         """Custom shared utility setup for tests."""
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.parent = self.portal
 
-    def test_ct_todo_task_schema(self):
-        fti = queryUtility(IDexterityFTI, name='Todo Task')
+    def test_ct_kanban_board_schema(self):
+        fti = queryUtility(IDexterityFTI, name='Kanban Board')
         schema = fti.lookupSchema()
-        self.assertEqual(ITodoTask, schema)
+        self.assertEqual(IKanbanBoard, schema)
 
-    def test_ct_todo_task_fti(self):
-        fti = queryUtility(IDexterityFTI, name='Todo Task')
+    def test_ct_kanban_board_fti(self):
+        fti = queryUtility(IDexterityFTI, name='Kanban Board')
         self.assertTrue(fti)
 
-    def test_ct_todo_task_factory(self):
-        fti = queryUtility(IDexterityFTI, name='Todo Task')
+    def test_ct_kanban_board_factory(self):
+        fti = queryUtility(IDexterityFTI, name='Kanban Board')
         factory = fti.factory
         obj = createObject(factory)
 
         self.assertTrue(
-            ITodoTask.providedBy(obj),
-            u'ITodoTask not provided by {0}!'.format(
+            IKanbanBoard.providedBy(obj),
+            u'IKanbanBoard not provided by {0}!'.format(
                 obj,
             ),
         )
 
-    def test_ct_todo_task_adding(self):
+    def test_ct_kanban_board_adding(self):
         setRoles(self.portal, TEST_USER_ID, ['Contributor'])
         obj = api.content.create(
             container=self.portal,
-            type='Todo Task',
-            id='todo_task',
+            type='Kanban Board',
+            id='kanban_board',
         )
 
         self.assertTrue(
-            ITodoTask.providedBy(obj),
-            u'ITodoTask not provided by {0}!'.format(
+            IKanbanBoard.providedBy(obj),
+            u'IKanbanBoard not provided by {0}!'.format(
                 obj.id,
             ),
         )
 
+        parent = obj.__parent__
+        self.assertIn('kanban_board', parent.objectIds())
+
         # check that deleting the object works too
         api.content.delete(obj=obj)
-        self.assertIn('todo_task', self.parent.objectIds())
+        self.assertNotIn('kanban_board', parent.objectIds())
 
-    def test_ct_todo_task_globally_addable(self):
+    def test_ct_kanban_board_globally_addable(self):
         setRoles(self.portal, TEST_USER_ID, ['Contributor'])
-        fti = queryUtility(IDexterityFTI, name='Todo Task')
+        fti = queryUtility(IDexterityFTI, name='Kanban Board')
         self.assertTrue(
             fti.global_allow,
             u'{0} is not globally addable!'.format(fti.id)
         )
 
-    def test_ct_todo_task_filter_content_type_true(self):
+    def test_ct_kanban_board_filter_content_type_true(self):
         setRoles(self.portal, TEST_USER_ID, ['Contributor'])
-        fti = queryUtility(IDexterityFTI, name='Todo Task')
+        fti = queryUtility(IDexterityFTI, name='Kanban Board')
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(
             fti.id,
             self.portal,
-            'todo_task_id',
-            title='Todo Task container',
-         )
+            'kanban_board_id',
+            title='Kanban Board container',
+        )
         self.parent = self.portal[parent_id]
         with self.assertRaises(InvalidParameterError):
             api.content.create(
