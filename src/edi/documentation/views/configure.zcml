@@ -8,14 +8,14 @@
 
   <browser:page
     name="all-tasks"
-    for="Products.CMFCore.interfaces.IFolderish"
+    for="edi.documentation.content.kanban_board.IKanbanBoard"
     class=".all_tasks.AllTasks"
     permission="zope2.View"
     />
 
   <browser:page
     name="active-tasks"
-    for="Products.CMFCore.interfaces.IFolderish"
+    for="edi.documentation.content.kanban_board.IKanbanBoard"
     class=".active_tasks.ActiveTasks"
     permission="zope2.View"
     />
