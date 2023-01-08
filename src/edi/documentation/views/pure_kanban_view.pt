@@ -1,13 +1,18 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      i18n:domain="edi.documentation"
-      metal:use-macro="context/main_template/macros/master">
-<body>
-  <metal:block fill-slot="content-core">
-      <h2 i18n:translate="">Sample View</h2>
-      <p tal:content="view/msg">this gets replaced</p>
-  </metal:block>
-</body>
-</html>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <th>Aufgabe</th>
+      <th>Projekt</th>
+      <th>Mitarbeiter:in</th>
+      <th>Status</th>
+    <thead>
+    <tbody>
+      <tr tal:repeat="task view/tasks">
+        <td><a tal:attributes="href task/getURL; title task/Title" tal:content="task/Title"/></td>
+        <td tal:content="task/Projekt"/>
+        <td tal:content="python: view.get_user(task.responsible)"/>
+        <td tal:content="task/review_state"/>
+      </tr>
+    </tbody>
+  </table>
+</div>

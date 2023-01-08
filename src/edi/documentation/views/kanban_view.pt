@@ -18,25 +18,8 @@
           <div tal:replace="structure provider:plone.belowcontenttitle" />
           <p class="documentDescription" tal:content="context/description" />
           <div tal:replace="structure provider:plone.abovecontentbody" />
-
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <th>Aufgabe</th>
-                  <th>Projekt</th>
-                  <th>Mitarbeiter:in</th>
-                  <th>Status</th>
-                <thead>
-                <tbody>
-                  <tr tal:repeat="task view/tasks">
-                    <td><a tal:attributes="href task/getURL; title task/Title" tal:content="task/Title"/></td>
-                    <td tal:content="task/Projekt"/>
-                    <td tal:content="python: view.get_user(task.responsible)"/>
-                    <td tal:content="task/review_state"/>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      
+          <span tal:replace="structure context/@@pure-kanban-view"/>
 
           <div tal:replace="structure provider:plone.belowcontentbody" />
         </div>

@@ -8,15 +8,15 @@
 
   <browser:page
     name="pure-kanban-view"
-    for="Products.CMFCore.interfaces.IFolderish"
+    for="edi.documentation.content.kanban_board.IKanbanBoard"
     class=".pure_kanban_view.PureKanbanView"
     template="pure_kanban_view.pt"
     permission="zope2.View"
     />
 
   <browser:page
-    name="kanban-view"
-    for="Products.CMFCore.interfaces.IFolderish"
+    name="view"
+    for="edi.documentation.content.kanban_board.IKanbanBoard"
     class=".kanban_view.KanbanView"
     template="kanban_view.pt"
     permission="zope2.View"
