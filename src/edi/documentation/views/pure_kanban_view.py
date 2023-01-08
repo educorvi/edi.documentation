@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from edi.documentation import _
-from Products.Five.browser import BrowserView
 from plone import api as ploneapi
+from Products.Five.browser import BrowserView
+
 
 class PureKanbanView(BrowserView):
 

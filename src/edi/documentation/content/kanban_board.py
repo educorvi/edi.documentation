@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 # from plone.app.textfield import RichText
+from plone import api as ploneapi
 from plone.app.multilingual.browser.interfaces import make_relation_root_path
+from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.supermodel import model
-from zope import schema
-from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
+from zope import schema
 from zope.interface import implementer
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+
 
 statusterms = [SimpleTerm(value="todo", token="todo", title="ToDo"),
                SimpleTerm(value="in_progress", token="in_progress", title="In Progress"),
@@ -60,7 +62,7 @@ class KanbanBoard(Container):
 
     def get_cluster_content(self, request):
         pure_view = ploneapi.content.get_view(
-                name='pure-cluster-view',
+                name='pure-kanban-view',
                 context=self,
                 request=request,
                 )

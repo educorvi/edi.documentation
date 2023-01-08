@@ -7,6 +7,13 @@
   -*- extra stuff goes here -*-
 
   <browser:page
+    name="active-tasks"
+    for="Products.CMFCore.interfaces.IFolderish"
+    class=".active_tasks.ActiveTasks"
+    permission="zope2.View"
+    />
+
+  <browser:page
     name="pure-kanban-view"
     for="edi.documentation.content.kanban_board.IKanbanBoard"
     class=".pure_kanban_view.PureKanbanView"
