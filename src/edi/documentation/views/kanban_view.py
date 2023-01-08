@@ -1,18 +1,6 @@
 # -*- coding: utf-8 -*-
-
 from edi.documentation import _
-from Products.Five.browser import BrowserView
+from edi.documentation.views.pure_kanban_view import PureKanbanView
 
-
-# from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-
-class KanbanView(BrowserView):
-    # If you want to define a template here, please remove the template from
-    # the configure.zcml registration of this view.
-    # template = ViewPageTemplateFile('kanban_view.pt')
-
-    def __call__(self):
-        # Implement your own actions:
-        self.msg = _(u'A small message')
-        return self.index()
+class KanbanView(PureKanbanView):
+    """ erbt vom PureKanbanView """

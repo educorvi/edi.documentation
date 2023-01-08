@@ -54,6 +54,7 @@ setup(
         'plone.api>=1.8.4',
         'plone.restapi',
         'plone.app.dexterity',
+        'jsonlib-python3',
     ],
     extras_require={
         'test': [
