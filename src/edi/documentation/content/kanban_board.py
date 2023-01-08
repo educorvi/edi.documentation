@@ -57,3 +57,11 @@ class IKanbanBoard(model.Schema):
 class KanbanBoard(Container):
     """ Content-type class for IKanbanBoard
     """
+
+    def get_cluster_content(self, request):
+        pure_view = ploneapi.content.get_view(
+                name='pure-cluster-view',
+                context=self,
+                request=request,
+                )
+        return pure_view.__call__()
