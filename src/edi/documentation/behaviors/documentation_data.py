@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
+from plone.app.multilingual.browser.interfaces import make_relation_root_path
 from edi.documentation import _
 from plone import schema
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
 from plone.supermodel import model
 from zope.component import adapter
+from plone.autoform import directives
 from zope.interface import implementer
 from zope.interface import Interface
 from zope.interface import provider
-
+from z3c.relationfield.schema import RelationChoice
+from plone.app.z3cform.widget import RelatedItemsFieldWidget
 
 class IDocumentationDataMarker(Interface):
     pass
@@ -22,8 +25,9 @@ class IDocumentationData(model.Schema):
         'projectdata',
         label=_(u"Projektdaten"),
         fields=['product_owner', 'pl_on_invoice', 'ansprechpartner', 'externe_url', 'zope_admin', 'serveradressen', 
-                'invoice_str_hnr', 'invoice_plz', 'invoice_ort']
+                'customer', 'auftragsnummer']
     )
+    project_folder = schema.Bool(title="Bei diesem Ordner handelt es sich um Projektordner eines aktiven Projekts.", required=False)
 
     product_owner = schema.TextLine(title="Projektleiter:in oder Product-Owner",
         required=False,)
@@ -49,15 +53,23 @@ class IDocumentationData(model.Schema):
         required=False,
     )
 
-    invoice_str_hnr = schema.TextLine(title="Straße und Hausnummer für evtl. abweichende Rechnungsanschrift",
+
+    customer = RelationChoice(
+        title='Verweis auf den Kunden (eventuell abweichend zum Ordner)',
+        vocabulary='plone.app.vocabularies.Catalog',
         required=False,
     )
 
-    invoice_plz = schema.TextLine(title="Postleitzahl für evtl. abweichende Rechnungsanschrift",
-        required=False,
+    directives.widget(
+        'customer',
+        RelatedItemsFieldWidget,
+        pattern_options={
+            'selectableTypes': ['Customer'],
+            'basePath': make_relation_root_path,
+        },
     )
 
-    invoice_ort = schema.TextLine(title="Ortsangabe für evtl. abweichende Rechnungsanschrift",
+    auftragsnummer = schema.TextLine(title="Auftrags- oder Vergabenummer beim Kunden",
         required=False,
     )
 
@@ -67,6 +79,16 @@ class IDocumentationData(model.Schema):
 class DocumentationData(object):
     def __init__(self, context):
         self.context = context
+
+    @property
+    def project_folder(self):
+        if hasattr(self.context, 'project_folder'):
+            return self.context.project_folder
+        return None
+
+    @project_folder.setter
+    def project_folder(self, value):
+        self.context.project_folder = value
 
     @property
     def product_owner(self):
@@ -139,33 +161,23 @@ class DocumentationData(object):
     def serveradressen(self, value):
         self.context.serveradressen = value
 
-
     @property
-    def invoice_str_hnr(self):
-        if hasattr(self.context, 'invoice_str_hnr'):
-            return self.context.invoice_str_hnr
+    def customer(self):
+        if hasattr(self.context, 'customer'):
+            return self.context.customer
         return None
 
-    @invoice_str_hnr.setter
-    def invoice_str_hnr(self, value):
-        self.context.invoice_str_hnr = value
+    @customer.setter
+    def customer(self, value):
+        self.context.customer = value
 
     @property
-    def invoice_plz(self):
-        if hasattr(self.context, 'invoice_plz'):
-            return self.context.invoice_plz
+    def auftragsnummer(self):
+        if hasattr(self.context, 'auftragsnummer'):
+            return self.context.auftragsnummer
         return None
 
-    @invoice_plz.setter
-    def invoice_plz(self, value):
-        self.context.invoice_plz = value
+    @auftragsnummer.setter
+    def auftragsnummer(self, value):
+        self.context.auftragsnummer = value
 
-    @property
-    def invoice_ort(self):
-        if hasattr(self.context, 'invoice_ort'):
-            return self.context.invoice_ort
-        return None
-
-    @invoice_ort.setter
-    def invoice_ort(self, value):
-        self.context.invoice_ort = value

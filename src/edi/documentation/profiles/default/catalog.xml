@@ -6,6 +6,9 @@
     <index name="Projekt" meta_type="FieldIndex">
         <indexed_attr value="Projekt"/>
     </index>
+    <index name="Projectfolder" meta_type="FieldIndex">
+        <indexed_attr value="project_folder"/>
+    </index>
     <column value="responsible"/>
     <column value="Projekt"/>
 </object>

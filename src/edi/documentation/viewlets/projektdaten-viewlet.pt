@@ -1,9 +1,9 @@
-<div class="container">
+<div tal:condition="context/ansprechpartner" class="container">
   <div class="col-md-1"></div>
   <div class="col-12 col-md-10">
   <table class="table table-sm">
   <tbody>
-    <tr>
+    <tr tal:condition="context/product_owner">
       <th>Projektleiter:in/Product Owner</th>
       <td tal:content="context/product_owner"/>
     </tr>
